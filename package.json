@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /angular-user-form/",
+    "deploy": "ng build --base-href /angular-user-form/ && npx angular-cli-ghpages --dir=dist/angular-user-form",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
