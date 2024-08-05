@@ -1,13 +1,48 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'angular-user-form';
+  userForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      streetAddress: ['', Validators.required],
+      addressLine2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^\\(\\d{3}\\) \\d{3}-\\d{4}$'),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      console.log(this.userForm.value);
+    } else {
+      console.log('Form is invalid');
+      this.userForm.markAllAsTouched();
+    }
+  }
 }
