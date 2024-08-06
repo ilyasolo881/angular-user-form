@@ -1,13 +1,9 @@
 {
-  "headers": [
+  "builds": [
     {
-      "source": "/dist/angular-user-form/browser/*.js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript"
-        }
-      ]
+      "src": "dist/angular-user-form/browser/**/*",
+      "use": "@vercel/static-build"
     }
-  ]
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/index.html" }]
 }
