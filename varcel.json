@@ -1,0 +1,20 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/angular-user-form/browser"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Content-Type": "text/javascript"
+      },
+      "dest": "/dist/angular-user-form/browser/$1"
+    }
+  ]
+}
